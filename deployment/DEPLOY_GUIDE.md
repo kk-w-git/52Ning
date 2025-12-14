@@ -38,7 +38,39 @@ CLIENT_URL=https://michael-blog.top360.sbs
 VITE_API_URL=https://michael-blog.top360.sbs/api
 ```
 
-### 2. 使用 deploy.sh 部署
+### 2. 本地一键部署（推荐）
+
+在本地项目目录执行：
+
+```bash
+cd deployment
+chmod +x local-deploy.sh
+./local-deploy.sh
+```
+
+这个脚本会自动：
+
+1. ✅ 检查本地 Git 状态
+2. ✅ 推送代码到 GitHub
+3. ✅ SSH 连接到服务器
+4. ✅ 拉取最新代码
+5. ✅ 安装依赖并构建
+6. ✅ 重启服务
+
+**首次使用前，需要配置 SSH 免密登录：**
+
+```bash
+# 在本地生成SSH密钥（如果还没有）
+ssh-keygen -t rsa -b 4096
+
+# 复制公钥到服务器
+ssh-copy-id root@michael-blog.top360.sbs
+
+# 测试连接
+ssh root@michael-blog.top360.sbs
+```
+
+### 3. 在服务器上手动部署
 
 在服务器上执行：
 
@@ -48,13 +80,7 @@ chmod +x deploy.sh
 ./deploy.sh
 ```
 
-或者从本地通过 SSH 执行：
-
-```bash
-ssh your-username@your-server-ip "cd /var/www/blog/deployment && ./deploy.sh"
-```
-
-### 3. 验证部署
+### 4. 验证部署
 
 ```bash
 # 查看 PM2 状态
