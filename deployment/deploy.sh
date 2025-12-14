@@ -5,7 +5,7 @@
 echo "🚀 开始部署博客系统..."
 
 # 设置变量
-PROJECT_DIR="/var/www/blog"
+PROJECT_DIR="/var/www/my-nodejs-blog"
 REPO_URL="https://github.com/kk-w-git/52Ning.git"  # 替换为你的 Git 仓库地址
 
 # 进入项目目录（如果不存在则克隆）
