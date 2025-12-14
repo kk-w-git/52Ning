@@ -36,8 +36,29 @@ echo "🔄 连接到服务器并执行部署..."
 ssh -T ${SERVER_HOST} << 'ENDSSH'
     set -e
     
+    # 检查项目目录是否存在
+    if [ ! -d /var/www/blog ]; then
+        echo "📦 项目目录不存在，开始克隆仓库..."
+        sudo mkdir -p /var/www/blog
+        sudo chown -R $USER:$USER /var/www/blog
+        cd /var/www
+        git clone https://github.com/kk-w-git/52Ning.git blog
+        echo "✅ 仓库克隆完成"
+    fi
+    
     echo "📥 切换到项目目录..."
     cd /var/www/blog
+    
+    # 检查是否是git仓库
+    if [ ! -d .git ]; then
+        echo "⚠️  目录存在但不是Git仓库，重新初始化..."
+        cd /var/www
+        sudo rm -rf blog
+        sudo mkdir -p blog
+        sudo chown -R $USER:$USER blog
+        git clone https://github.com/kk-w-git/52Ning.git blog
+        cd blog
+    fi
     
     echo "📥 拉取最新代码..."
     git pull origin main
