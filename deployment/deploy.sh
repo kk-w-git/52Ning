@@ -26,7 +26,7 @@ cd server
 npm install --production
 
 # 重启 PM2
-pm2 restart ecosystem.config.js || pm2 start ecosystem.config.js
+pm2 restart ecosystem.config.cjs || pm2 start ecosystem.config.cjs
 pm2 save
 
 # 部署前端

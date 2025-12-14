@@ -75,7 +75,7 @@ ssh -T ${SERVER_HOST} << 'ENDSSH'
     npm install --production
     
     echo "🔄 重启 PM2..."
-    pm2 restart ecosystem.config.js || pm2 start ecosystem.config.js
+    pm2 restart ecosystem.config.cjs || pm2 start ecosystem.config.cjs
     pm2 save
     
     echo "🎨 部署前端..."
