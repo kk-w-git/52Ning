@@ -3,8 +3,7 @@
 # 本地部署脚本 - 在本地运行，自动部署到远程服务器
 
 # 配置项 - 请根据实际情况修改
-SERVER_USER="root"  # 服务器用户名
-SERVER_HOST="michael-blog.top360.sbs"  # 服务器地址或IP
+SERVER_HOST="blog-vps"  # SSH配置别名或服务器地址
 SERVER_PATH="/var/www/blog"  # 服务器上的项目路径
 BRANCH="main"  # 要部署的分支
 
@@ -34,7 +33,7 @@ echo "✅ 代码已推送到GitHub"
 
 # 3. 通过SSH在服务器上执行部署
 echo "🔄 连接到服务器并执行部署..."
-ssh ${SERVER_USER}@${SERVER_HOST} << 'ENDSSH'
+ssh -T ${SERVER_HOST} << 'ENDSSH'
     set -e
     
     echo "📥 切换到项目目录..."
@@ -74,7 +73,7 @@ if [ $? -eq 0 ]; then
     echo "✨ 部署成功！"
     echo "🌐 访问: https://michael-blog.top360.sbs"
     echo ""
-    echo "📊 查看日志: ssh ${SERVER_USER}@${SERVER_HOST} 'pm2 logs blog-backend'"
+    echo "📊 查看日志: ssh ${SERVER_HOST} 'pm2 logs blog-backend'"
 else
     echo "❌ 部署失败，请检查服务器日志"
     exit 1
